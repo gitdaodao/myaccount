@@ -13,14 +13,21 @@
 <body>
     <div id="header">
         <span class="logo">用户管理</span>
-        <ul class="menu">
-            <li><a href="">用户中心</a></li>
-            <li><a href="">文章管理</a></li>
-            <li><a href="">产品管理</a></li>
-
-        </ul>
+        {% if request.user.is_authenticated %}
+             <ul class="menu">
+            
+                <li><a href="">用户中心</a></li>
+                <li><a href="">文章管理</a></li>
+                <li><a href="">产品管理</a></li>
+            </ul>
+            {% endif %}
         <span class="user"> 
-            欢迎: easy <a href="#">退出登录</a> 
+            {% if request.user.is_authenticated %}
+                 欢迎: {{request.user.username }} <a href="{% url 'account:logout' %}">退出登录</a> 
+            {% else %}
+                <a href="{% url 'account:login' %}">登录</a>
+            {% endif %}
+            
         </span>
     </div>
     {% block content %}

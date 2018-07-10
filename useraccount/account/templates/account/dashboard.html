@@ -7,4 +7,11 @@
 
 {% block content %}
 <h1>用户中心</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis mollitia voluptatibus doloribus aliquid amet? Vero fuga dolore aut nisi, pariatur deserunt cupiditate dicta quos mollitia accusantium porro illo labore doloremque.</p>
+    <ul>
+        <li>{{request.user.username }}</li>
+        <li>{{request.user.email }}</li>
+        <li>{{request.user.staff }}</li>
+        <li>{{request.user.is_authenticated }}</li>
+    </ul>
 {% endblock content %}

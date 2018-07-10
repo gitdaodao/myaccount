@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,reverse
 from .forms import LoginForm
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 
 # Create your views here.
@@ -29,3 +29,8 @@ def user_login(request):
                 return HttpResponse('用户名或者密码错误请重试~')
     form=LoginForm()
     return render(request,'account/login.html',{"form":form })
+
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('account:login'))
