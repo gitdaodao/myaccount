@@ -119,3 +119,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# diango 2.0前的版本 用它
+# from django.core.urlresolvers import reverse_lazy  
+from django.urls import reverse_lazy
+
+LOGIN_REDIRECT_URL=reverse_lazy('dashboard')
+LOGIN_URL=reverse_lazy('login')
+LOGOUT_URL=reverse_lazy('logout')
+

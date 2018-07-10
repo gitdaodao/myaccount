@@ -1,10 +1,18 @@
 from django.shortcuts import render,redirect,reverse
 from .forms import LoginForm
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 # Create your views here.
+# 第三种方案 settings.py 同意匹配地址后 @login_required(login_url='/account/login/') 这个()可以省略了
+#第二方案 @login_required(login_url='/account/login/')
+@login_required(login_url='/account/login/')
 def dashboard(request):
+    """用户中心"""
+    # 第一种限制未授权用户登录
+    # if not request.user.is_authenticated:
+    #     return redirect(reverse('account:login'))
     return render(request,'account/dashboard.html')
 
 
