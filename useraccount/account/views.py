@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,reverse
-from .forms import LoginForm,UserRegForm
+from .forms import LoginForm,UserRegForm,UserForm,ProfileForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+
 
 # Create your views here.
 # 第三种方案 settings.py 同意匹配地址后 @login_required(login_url='/account/login/') 这个()可以省略了
@@ -57,3 +58,16 @@ def user_reg(request):
     else:
         new_form=UserRegForm()
     return render(request,'account/register.html',{'new_form':new_form})
+
+def edit(request):
+    """用户编辑"""
+    if request.method=='POST':
+        user_form=UserForm(instance=request.user,data=request.POST)
+        profile_form=ProfileForm(instance=request.user.profile,data=request.POST,files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form=UserForm(instance=request.user)
+        profile_form=ProfileForm(instance=request.user.profile)
+    return render(request,'account/edit.html',{'user_form':user_form,'profile_form':profile_form })
