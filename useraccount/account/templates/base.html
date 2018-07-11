@@ -16,9 +16,9 @@
         {% if request.user.is_authenticated %}
              <ul class="menu">
             
-                <li><a href="">用户中心</a></li>
-                <li><a href="">文章管理</a></li>
-                <li><a href="">产品管理</a></li>
+                <li><a href="#">用户中心</a></li> 
+                <li><a href="#">文章管理</a></li>
+                <li><a href="#">产品管理</a></li>
             </ul>
             {% endif %}
         <span class="user"> 
@@ -30,8 +30,10 @@
             
         </span>
     </div>
+    <div id="content">
     {% block content %}
     
     {% endblock content %}
+    </div>
 </body>
 </html>
