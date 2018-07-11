@@ -24,13 +24,13 @@ class UserRegForm(forms.ModelForm):
         return data['re_password']
 
 
-class UserForm(forms.ModelForm):
+class UserEditForm(forms.ModelForm):
     class Meta:
         model=User
         fields=('username','email','first_name')
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
         model=Profile
         fields=('mobile','photo')
