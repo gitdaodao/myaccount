@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,reverse
-from .forms import LoginForm
+from .forms import LoginForm,UserRegForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -18,6 +18,7 @@ def dashboard(request):
 
 
 def user_login(request):
+    """用户登录"""
     if request.method=='POST':
         form=LoginForm(request.POST)
         if form.is_valid():
@@ -42,3 +43,17 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('account:login'))
+
+
+def user_reg(request):
+    """新用户注册"""
+    if request.method=='POST':
+        new_form=UserRegForm(request.POST)
+        if new_form.is_valid():
+            u=new_form.save(commit=False)
+            u.set_password(new_form.cleaned_data['password'])
+            u.save()
+            return render(request,'account/register_done.html',{'new_user':u})
+    else:
+        new_form=UserRegForm()
+    return render(request,'account/register.html',{'new_form':new_form})

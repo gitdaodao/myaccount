@@ -7,14 +7,14 @@ class LoginForm(forms.Form):
     password=forms.CharField(label='密码',widget=forms.PasswordInput)
 
 
-class UserRegisterForm(forms.ModelForm):
+class UserRegForm(forms.ModelForm):
     """依据已有User类模型 造自己需要的用户注册表单"""
     password=forms.CharField(label='密码',max_length=21,widget=forms.PasswordInput)
     re_password=forms.CharField(label='重复密码',widget=forms.PasswordInput)
 
     class Meta:
         model=User
-        fileds=('username','email','first_name')
+        fields=('username','email','first_name')
 
     def cl_re_password(self):
         data=self.cleaned_data
